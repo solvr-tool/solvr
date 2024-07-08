@@ -52,4 +52,42 @@ class ConflictSearcherTest {
 
         Assertions.assertInstanceOf(ConflictsFound::class.java, result)
     }
+
+    @Test
+    fun `test_005 should return one conflict`() {
+        val filename = "/solvr/core/005_one_conflict_line_1"
+        val input = this::class.java.getResourceAsStream(filename) ?: throw FileNotFoundException(filename)
+
+        val conflictSearcher = ConflictSearcher()
+
+        val result = conflictSearcher.search(input)
+
+        Assertions.assertInstanceOf(ConflictsFound::class.java, result)
+        val conflicts = (result as ConflictsFound).conflicts
+
+        val expectedConflicts = listOf(Conflict(2, 2, 4, 4))
+
+        Assertions.assertEquals(expectedConflicts, conflicts)
+    }
+
+    @Test
+    fun `test_006 should return two conflicts`() {
+        val filename = "/solvr/core/006_two_conflicts"
+        val input = this::class.java.getResourceAsStream(filename) ?: throw FileNotFoundException(filename)
+
+        val conflictSearcher = ConflictSearcher()
+
+        val result = conflictSearcher.search(input)
+
+        Assertions.assertInstanceOf(ConflictsFound::class.java, result)
+        val conflicts = (result as ConflictsFound).conflicts
+
+        val expectedConflicts =
+            listOf(
+                Conflict(2, 2, 4, 4),
+                Conflict(8, 8, 10, 10),
+            )
+
+        Assertions.assertEquals(expectedConflicts, conflicts)
+    }
 }
