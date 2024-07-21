@@ -1,4 +1,4 @@
-package solvr.core
+package solvr.core.searcher
 
 sealed interface ConflictSearchResult
 

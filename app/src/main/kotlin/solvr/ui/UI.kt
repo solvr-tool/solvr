@@ -1,5 +1,6 @@
 package solvr.ui
 
+import solvr.core.parser.FileParser
 import java.awt.GridLayout
 import java.io.File
 import javax.swing.*
@@ -8,6 +9,12 @@ class UI {
     companion object {
         private fun createAndShowGUI(filePath: String) {
             val file = File(filePath)
+
+            val fileParser = FileParser()
+
+            val headFile = fileParser.getHeadFile(file.readText())
+            val otherFile = fileParser.getOtherFile(file.readText())
+
             // Create and set up the window.
             val frame = JFrame("Solvr")
             frame.setSize(1000, 600)
@@ -18,8 +25,8 @@ class UI {
             val panel = JPanel(GridLayout(1, 3))
             panel.border = BorderFactory.createEmptyBorder(10, 10, 10, 10)
 
-            val left = JTextArea(file.readText())
-            left.border = BorderFactory.createTitledBorder("Current")
+            val left = JTextArea(headFile)
+            left.border = BorderFactory.createTitledBorder("Head")
             left.isEditable = false
             panel.add(left)
 
@@ -27,7 +34,7 @@ class UI {
             center.border = BorderFactory.createTitledBorder("Result")
             panel.add(center)
 
-            val right = JTextArea(file.readText())
+            val right = JTextArea(otherFile)
             right.border = BorderFactory.createTitledBorder("Other")
             right.isEditable = false
             panel.add(right)

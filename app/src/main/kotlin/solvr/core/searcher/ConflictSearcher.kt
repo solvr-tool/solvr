@@ -1,4 +1,4 @@
-package solvr.core
+package solvr.core.searcher
 
 import java.io.BufferedReader
 import java.io.InputStream
