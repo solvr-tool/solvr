@@ -7,3 +7,6 @@ build
 # IDEs
 .idea
 .vscode
+frontend/node_modules
+frontend/dist
+.DS_Store
